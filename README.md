@@ -8,6 +8,7 @@
 * peft
 * transformers
 * accelerate
+The minimum resource requirement is one NVIDIA RTX 3090.
 
 
 # Model
