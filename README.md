@@ -37,7 +37,7 @@ Attack Effectiveness Alignment
 python attack_alignment.py --gradient_back skip-gradient
 
 #gradient checkpoint
-python attack_alignment.py -gradient_back gc
+python attack_alignment.py --gradient_back gc
 ```
 
 We will further improve the repository after the paper is accepted.
