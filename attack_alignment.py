@@ -17,7 +17,7 @@ def get_args():
     parser.add_argument('--test_sample_num', type=int, default=1000, help='use guidance or not')
     parser.add_argument('--index_cond', default=40, type=int, help='use guidance or not')
     parser.add_argument('--use_da', action='store_true',default=True, help='use diffusion_augmentation')
-    parser.add_argument('--gradient_backpop', default='skip-step', type=str, help='skip-step,grad-checkpoint')
+    parser.add_argument('--gradient_back', default='skip-gradient', type=str, help='skip-gradient,grad-checkpoint')
     parser.add_argument('--inversion_step', default=10, type=int, help='use guidance or not')
     parser.add_argument('--save_image',default=True,type=bool)
     parser.add_argument('--attack_method', type=str, default='Ours_vca_p0.1', help='attack method')
@@ -93,7 +93,7 @@ def main(args):
     data=data[:total_img_num]
     device='cuda'
     transfer_models = [WrapperModel(load_model(target_model_names[i]), mean_list[i], stddev_list[i]).to(device) for i in range(len(target_model_names))]
-    detals='dual_path'+str(args.use_noise_optim)+'diffusion_augmentation_'+str(args.use_da)+'_gradient_backpop_'+args.gradient_backpop+'_use_lora_'+str(args.use_lora)
+    detals='dual_path'+str(args.use_noise_optim)+'diffusion_augmentation_'+str(args.use_da)+'_gradient_back_'+args.gradient_back+'_use_lora_'+str(args.use_lora)
     attack_methods=args.attack_method
     reuslt_dir=os.path.join(args.output_path,attack_methods,args.source_model,detals)
     print(reuslt_dir)
@@ -142,29 +142,19 @@ def main(args):
                     
                     ori_latents=pipeline.enimg2latent(image_path)
                     
-                    if args.gradient_backpop == 'skip-step':
-                        st=time.time()
+                    if args.gradient_back == 'skip-gradient':
                         latent_T = pipeline.inverse(image_path, prompt, 50, guidance_scale=1)
                         adv_image_tensor = pipeline.attack_optimization(prompt=prompt, latents=latent_T,
                                 guidance_scale=1.0,classfier=source_model,label=labels,attack_config=attack_config,use_noise_opt=args.use_noise_optim,index_cond=args.index_cond,
                                 use_da=args.use_da,ori_latents=ori_latents,image_size=img_size)
-                        et=time.time()
-                        print('Time:',et-st)
-                    elif args.gradient_backpop == 'vca':
-                        st=time.time()
+                    elif args.gradient_back == 'vca':
                         latent_T = pipeline.inverse(image_path, prompt, 50, guidance_scale=1)
                         adv_image_tensor = pipeline.vca(prompt=prompt, latents=latent_T,guidance_scale=1.0,image_size=img_size)
-                        et=time.time()
-                        print('Time:',et-st)
                     else:
-                        start=time.time()
                         latent_T = pipeline.inverse(image_path, prompt, 50, guidance_scale=1,inversion_step=args.inversion_step)
                         adv_image_tensor = pipeline.attack_optimization_checkpoint(prompt=prompt, latents=latent_T,
                                 guidance_scale=1.0,classfier=source_model,label=labels,attack_config=attack_config,use_noise_opt=args.use_noise_optim,index_cond=args.index_cond, image_size=img_size,
                                 use_da=args.use_da,ori_latents=ori_latents,inversion_step=args.inversion_step)
-                        end=time.time()
-                        print('Time:',end-start)
-                        
                     if args.save_image:
                         save_image(adv_image_tensor.clone(),os.path.join(reuslt_dir,image_path.split('/')[-1]))
                 output_dict={attack_methods:adv_image_tensor.detach()}
