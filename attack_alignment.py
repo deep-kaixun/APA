@@ -30,7 +30,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
 import torch
-from pipe_new import AttackPipeline
+from pipe_ours import AttackPipeline
 from utils import *
 from PIL import Image
 import torchvision.transforms as transforms
