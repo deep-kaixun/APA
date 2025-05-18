@@ -17,7 +17,7 @@ The minimum resource requirement is one NVIDIA RTX 3090.
 cd model_ckpt
 bash install.sh
 ```
-More models will be provided in Google Clound
+More models will be provided in Google Cloud
 
 # Datasets
 We provide subset in images_un.
