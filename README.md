@@ -9,7 +9,6 @@
 * transformers
 * accelerate
   
-The minimum resource requirement is one NVIDIA RTX 3090.
 
 
 # Model
@@ -17,7 +16,6 @@ The minimum resource requirement is one NVIDIA RTX 3090.
 cd model_ckpt
 bash install.sh
 ```
-More models will be provided in Google Cloud
 
 # Datasets
 We provide subset in images_un.
@@ -40,4 +38,4 @@ python attack_alignment.py --gradient_back skip-gradient
 python attack_alignment.py --gradient_back gc
 ```
 
-We will further improve the repository after the paper is accepted.
+
