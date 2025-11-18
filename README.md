@@ -16,11 +16,12 @@
 cd model_ckpt
 bash install.sh
 ```
+Installed from [ACA](https://github.com/Omenzychen/Adversarial_Content_Attack)
 
 # Datasets
 We provide subset in images_un.
 
-All data can be installed from [ACA](https://github.com/Omenzychen/Adversarial_Content_Attack)
+All data can be installed from [there](https://github.com/VL-Group/Natural-Color-Fool/releases/download/data/images.zip)
 
 ## Attack
 Visual Consistency Alignment
