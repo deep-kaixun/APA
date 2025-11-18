@@ -40,10 +40,10 @@ def load_model(model):
         # https://download.pytorch.org/models/densenet161-8d451a50.pth
         net = torchvision.models.densenet161(pretrained=True)
         # net.load_state_dict(torch.load(os.path.join(home_path, 'densenet161-8d451a50.pth')))
-    elif model == 'ResNet152':
-        # https://download.pytorch.org/models/resnet152-394f9c45.pth
-        net = torchvision.models.resnet152()
-        net.load_state_dict(torch.load(os.path.join(home_path, 'resnet152-394f9c45.pth')))
+    # elif model == 'ResNet152':
+    #     # https://download.pytorch.org/models/resnet152-394f9c45.pth
+    #     net = torchvision.models.resnet152()
+    #     net.load_state_dict(torch.load(os.path.join(home_path, 'resnet152-394f9c45.pth')))
     elif model == 'EF-b7':
         # net = EfficientNet.from_name('efficientnet-b7')
         # loaded_state_dict = torch.load(os.path.join(home_path, 'checkpoints/efficientnet-b7-dcc49843.pth'))
@@ -55,13 +55,10 @@ def load_model(model):
         net.load_state_dict(torch.load(os.path.join(home_path, 'vgg19-dcbb9e9d.pth')))
     elif model == 'inception_v3':
         net = torchvision.models.inception_v3(pretrained=True)
-        # net.load_state_dict(torch.load('/youtu-pangu-public/omenzychen/Working/TransferablePatch/checkpoints/inception_v3_google-1a9a5a14.pth'))
     elif model == 'mvit':
         net = timm.create_model('mobilevit_s', pretrained=True, num_classes=1000)
-        # net.load_state_dict(torch.load('/youtu-pangu-public/omenzychen/Working/Text2ImageAttack/third_party/mobilevit_s-38a5a959.pth'))
     elif model == 'pvtv2':
         net = timm.create_model('pvt_v2_b2_li', pretrained=True, num_classes=1000)
-        # state_dict = torch.load('/youtu-pangu-public/omenzychen/Working/TransferablePatch/checkpoints/pvt_v2_b2_li.pth')
     elif model == 'swint':
         net = timm.create_model('swin_base_patch4_window7_224.ms_in22k_ft_in1k', pretrained=True, num_classes=1000)
     elif model == 'vit':
