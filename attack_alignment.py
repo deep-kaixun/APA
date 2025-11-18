@@ -55,7 +55,7 @@ def set_seed(seed):
 
 def main(args):
     set_seed(args.seed)
-    target_model_names=['mnv2','inception_v3', 'ResNet50', 'DenseNet161','ResNet152','EF-b7', 'mvit','vit','swint','pvtv2']
+    target_model_names=['mnv2','inception_v3', 'ResNet50', 'DenseNet161','EF-b7', 'mvit','vit','swint','pvtv2']
     source_model_names=[args.source_model]
     torch.manual_seed(0)
     torch.backends.cudnn.deterministic = True
