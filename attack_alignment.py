@@ -20,7 +20,7 @@ def get_args():
     parser.add_argument('--gradient_back', default='skip-gradient', type=str, help='skip-gradient,grad-checkpoint')
     parser.add_argument('--inversion_step', default=10, type=int, help='use guidance or not')
     parser.add_argument('--save_image',default=True,type=bool)
-    parser.add_argument('--attack_method', type=str, default='apa-skip-graidient', help='attack method')
+    parser.add_argument('--attack_method', type=str, default='apa', help='attack method')
     args = parser.parse_args()
     return args
 args=get_args()
