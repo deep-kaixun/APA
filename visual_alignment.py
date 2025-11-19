@@ -241,7 +241,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_path', type=str,default='data.json')
     parser.add_argument('--output_path', type=str,default='ckpt_2025')
-    parser.add_argument('--num', type=int,default=1000)
+    parser.add_argument('--num', type=int,default=5)
     args = parser.parse_args()
     with open(args.data_path) as f:
         data=json.load(f)
